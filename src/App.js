@@ -5,6 +5,7 @@ import InfoBox from "./InfoBox";
 import Map from './Map';
 import Table from './Table'
 import { sortData } from "./util";
+import LineGraph from "./LineGraph";
 
 
 function App() {
@@ -64,7 +65,7 @@ await fetch(url)
   };
 
 
-  console.log("Country info >>>>>",countryInfo)
+  // console.log("Country info >>>>>",countryInfo)
 
   return (
     <div className="app">
@@ -103,6 +104,7 @@ await fetch(url)
   <h3>Live Cases by Country</h3>
   <Table  countries={tableData}/>
   <h3>Worldwide new Cases</h3>
+  <LineGraph/>
 </CardContent>
       </Card>
     </div>
