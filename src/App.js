@@ -4,6 +4,7 @@ import "./App.css";
 import InfoBox from "./InfoBox";
 import Map from './Map';
 import Table from './Table'
+import { sortData } from "./util";
 
 
 function App() {
@@ -31,7 +32,9 @@ useEffect(()=>{
             value: country.countryInfo.iso2,
             flag: country.countryInfo.flag,
           }));
-          setTableData(data);
+
+          const sortedData = sortData(data);
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
