@@ -41,7 +41,7 @@ getCountriesData();
               countries.map(country => (
               <MenuItem 
               className="app__headerCountryName"
-              value={country.value}>{country.name} 
+              value={country.value}><h5>{country.name}</h5> 
               <img
                className="app__headerFlag"
                src={country.flag} alt=""/>
