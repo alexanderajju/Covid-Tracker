@@ -6,13 +6,18 @@ import Map from './Map';
 import Table from './Table'
 import { sortData } from "./util";
 import LineGraph from "./LineGraph";
+import "leaflet/dist/leaflet.css";
 
 
 function App() {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState("worldwide");
 const [countryInfo , setCountryInfo]=useState({});
-const [tableData, setTableData]= useState([])
+const [tableData, setTableData]= useState([]);
+const [mapCenter,setMapCenter]=useState({
+  lat:34.80746,lng:-40.4796
+})
+const [mapZoom,setMapZoom]=useState(3)
 
 
 useEffect(()=>{
@@ -61,6 +66,9 @@ await fetch(url)
   // from the country response
   setCountryInfo(data);
 
+  setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+  setMapZoom(4);
+
 })
   };
 
@@ -73,7 +81,10 @@ await fetch(url)
       <div className="app__header">
         <h1>Covid-19 TRACKER</h1>
         <FormControl className="app__dropdown">
-          <Select variant="outlined" value={country} onChange={onCountryChange} >
+          <Select variant="outlined" value={country}
+           
+          
+          onChange={onCountryChange} >
             
             <MenuItem
             className="app__headerCountryName"
@@ -82,7 +93,9 @@ await fetch(url)
             {countries.map((country) => (
               <MenuItem
                 className="app__headerCountryName"
-                value={country.value}
+                value={ country.value
+                 
+                }
               >
                 <h5>{country.name}</h5>
                 <img className="app__headerFlag" src={country.flag} alt="" />
@@ -97,7 +110,7 @@ await fetch(url)
         <InfoBox title="Recovered"  cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
         <InfoBox title="Deaths"  cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
       </div>
-      <Map/>
+      <Map center={mapCenter} zoom={mapZoom} />
       </div>
       <Card className="app__right">
 <CardContent>
